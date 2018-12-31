@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace="DAO.ProfileDAO">
+
+	<resultMap type="Profile" id="profileMap">
+		<result property="profileId" column="id" />
+		<result property="profileName" column="profileName" />
+		<result property="firstName" column="firstName" />
+		<result property="lastName" column="lastName" />
+		<result property="created" column="created" />
+	</resultMap>
+
+	<select id="getProfileList" resultMap="profileMap">
+		SELECT * FROM PROFILE
+	</select>
+	<select id="getProfile" resultMap="profileMap">
+		SELECT * FROM PROFILE WHERE PROFILENAME=#{profileName}
+	</select>
+	<insert id="addProfile" parameterType="Profile">
+		INSERT INTO PROFILE VALUES
+		(#{profileId},#{profileName},#{firstName},#{lastName},#{created})
+	</insert>
+	<update id="updateProfile" parameterType="Profile">
+		UPDATE PROFILE SET
+		FIRSTNAME = #{firstName}, LASTNAME = #{lastName} WHERE PROFILENAME =
+		#{profileName}
+	</update>
+	<delete id="deleteProfile" parameterType="java.lang.String">
+		DELETE FROM PROFILE
+		WHERE PROFILENAME = #{profileName}
+	</delete>
+	<select id="getProfileCreatedDate" resultType="java.util.Date">
+		<bind name="profileName" value="arg0" />
+		<bind name="profileId" value="arg1" />
+		SELECT CREATED FROM PROFILE
+		<where>
+			<if test="profileName != '' and profileName != null">
+				PROFILENAME = #{profileName} 
+			</if>
+			<if test="profileId != '' and profileId !=null ">
+			 and ID = #{profileId}
+			</if>
+		</where>
+
+	</select>
+	<select id="getMaxId" resultType="java.lang.Long">
+	
+		select max(id) + 1 from profile;
+	
+	</select>
+</mapper>  
+  
