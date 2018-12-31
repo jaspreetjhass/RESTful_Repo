@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import DAOImpl.ProfileDAOImpl;
 import beans.Profile;
 
-public class DAOExecutor {
+public class ProfileDAOExecutor {
 
 	public static void main(String[] args) {
 		
