@@ -27,5 +27,6 @@
 	<mappers>
 		<mapper resource="profile-mapper.xml"/>
 		<mapper class="DAO.MessageDAO"/>
+		<mapper class="DAO.CommentDAO"/>
 	</mappers>
 </configuration>

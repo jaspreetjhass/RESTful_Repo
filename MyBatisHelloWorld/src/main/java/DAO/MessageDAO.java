@@ -36,7 +36,7 @@ public interface MessageDAO {
 	void updateMessage(Message message);
 
 	@Delete("DELETE FROM MESSAGE WHERE ID = #{messageId}")
-	void deleteMessage(@Param("messageId")Long messageId);
+	void deleteMessage(@Param("messageId") Long messageId);
 
 	@Select("SELECT AUTHOR FROM MESSAGE WHERE ID = #{messageId}")
 	@ResultType(value = java.lang.String.class)
