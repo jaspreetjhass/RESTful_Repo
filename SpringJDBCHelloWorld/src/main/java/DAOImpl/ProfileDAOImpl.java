@@ -1,6 +1,7 @@
 package DAOImpl;
 
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,14 @@ public class ProfileDAOImpl implements ProfileDAO {
 		else
 			System.out.println("error while deleting record");
 
+	}
+
+	@Override
+	public Date getProfileCreatedDate(String profileName) {
+
+		Date createdDate  = template.queryForObject("select created from profile where profileName = ?", Date.class, profileName);
+		
+		return createdDate;
 	}
 
 }

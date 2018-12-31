@@ -28,8 +28,10 @@ public class DAOExecutor {
 		Profile updatedProfile =  new Profile(2018123104l, "priya", "priya", "kaur", new Date());
 		daoImpl.updateProfile(updatedProfile);
 		System.out.println("***********************************************");
-		//deeleteProfile
+		//deleteProfile
 		daoImpl.deleteProfile("priya");
 		System.out.println("***********************************************");
+		//getProfileCreatedDate
+		System.out.println(daoImpl.getProfileCreatedDate("priya"));
 	}
 }
