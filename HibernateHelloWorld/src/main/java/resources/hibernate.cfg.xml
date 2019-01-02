@@ -17,6 +17,7 @@
 		<property name="hibernate.format_sql">true</property>
 		<!-- mapper files  -->
 		<mapping resource="resources/profile.mapper.xml"/>
+		<mapping class="beans.Message"/>
 	</session-factory>
 
 
