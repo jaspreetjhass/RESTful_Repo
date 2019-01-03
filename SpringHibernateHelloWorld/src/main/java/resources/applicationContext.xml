@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context 
-    http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="daoImpl.**"></context:component-scan>
 
 	<bean class="org.apache.commons.dbcp.BasicDataSource">
@@ -18,7 +18,8 @@
 
 	</bean>
 
-	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" autowire="byType">
+	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+		autowire="byType">
 		<property name="mappingResources">
 			<list>
 				<value>resources/profile.mapper.xml</value>
@@ -27,6 +28,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>beans.Message</value>
+				<value>beans.Comment</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -35,9 +37,16 @@
 				<prop key="show_sql">true</prop>
 				<prop key="hbm2ddl.auto">update</prop>
 				<prop key="format_sql">true</prop>
+				<prop key="autoCommit">true</prop>
+				<prop key="checkWriteOperation">false</prop>
+				<prop key="current_session_context_class">thread</prop>
 			</props>
 		</property>
 	</bean>
 
+	<bean class="org.springframework.orm.hibernate5.HibernateTemplate"
+		autowire="byType">
+		<property name="checkWriteOperations" value="false"/>
+	</bean>
 
 </beans>
