@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="beans.Profile" table="profile">
+		<id name="profileId" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="profileName" column="profileName"></property>
+		<property name="firstName" column="firstName"></property>
+		<property name="lastName" column="lastName"></property>
+		<property name="created" column="created"></property>
+	</class>
+
+</hibernate-mapping>
