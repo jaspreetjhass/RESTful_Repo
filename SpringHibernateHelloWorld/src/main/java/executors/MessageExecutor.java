@@ -4,28 +4,27 @@ import java.util.Date;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-import beans.Profile;
-import daoImpl.ProfileDAOImpl;
-import daos.ProfileDAO;
+import beans.Message;
+import daoImpl.MessageDAOImpl;
+import daos.MessageDAO;
 
-public class ProfileExecutor {
+public class MessageExecutor {
 
 	public static void main(String[] args) {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("resources/applicationContext.xml");
-		ProfileDAO profileDAO = context.getBean(ProfileDAOImpl.class);
-		profileDAO.getProfileList().forEach(System.out::println);
+		MessageDAO messageDAO = context.getBean(MessageDAOImpl.class);
+		messageDAO.getMessages().forEach(System.out::println);
 		System.out.println("*************************************************");
-		System.out.println(profileDAO.getProfileById(2018122901l));
+		System.out.println(messageDAO.getMessageById(1l));
 		System.out.println("*************************************************");
-		Profile profile =  new Profile(2018123106l,"sahilHR","sahil","singh", new Date());
-		//profileDAO.addProfile(profile);
+		Message message = new Message(3l, "travelling to paris", new Date(), "amanBhandari");
+		 messageDAO.addMessage(message);
 		System.out.println("*************************************************");
-		//profileDAO.updateProfile(profile);
+		 messageDAO.updateMessage(message);
 		System.out.println("*************************************************");
-		//profileDAO.deleteProfile("sahilHR");
+		 messageDAO.deleteMessage(3l);
 	}
 
 }

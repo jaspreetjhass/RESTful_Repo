@@ -10,7 +10,7 @@
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="daoImpl.**"></context:component-scan>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/webserviceDb"></property>
 		<property name="username" value="root"></property>
@@ -18,11 +18,15 @@
 
 	</bean>
 
-	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" autowire="byType">
 		<property name="mappingResources">
 			<list>
 				<value>resources/profile.mapper.xml</value>
+			</list>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>beans.Message</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
