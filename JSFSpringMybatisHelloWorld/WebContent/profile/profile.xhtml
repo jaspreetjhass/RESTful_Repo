@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF Employee Tab</title>
+</h:head>
+<h:body>
+	<h:form>
+    	   ID   			: <h:inputText value="#{profile.profileId}" id="id"></h:inputText>
+		<br />
+    	   ProfileName   	: <h:inputText value="#{profile.profileName}"></h:inputText>
+		<br />
+    	   FirstName   		: <h:inputText value="#{profile.firstName}"
+			id="profileName"></h:inputText>
+		<br />
+    	   LastName 		: <h:inputText value="#{profile.lastName}"></h:inputText>
+		<br />
+    	   DateCreated      : <h:inputText value="#{profile.created}"
+			id="created"></h:inputText>
+		<br />
+		<h:commandLink value="profileList"
+			action="#{profileAction.getProfileList}"></h:commandLink><br/>
+		<h:commandLink value="profile" action="#{profileAction.getProfile}">
+		</h:commandLink>
+		<br />
+
+		<h:dataTable value="#{profile.profileList}" var="displayData">
+			<h:column>
+				<f:facet name="header"></f:facet>
+    			#{displayData.profileId}
+    		</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+    			#{displayData.profileName}
+    		</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+    			#{displayData.firstName}
+    		</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+    			#{displayData.lastName}
+    		</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+    			#{displayData.created}
+    		</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
