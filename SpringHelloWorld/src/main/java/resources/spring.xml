@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="beans.**;SingletonPrototypeConcept.**"></context:component-scan>
+
+	<!-- <bean class="beans.Profile"> <property name="profileId" value="12323"></property> 
+		<property name="profileName" value="jpjhass"></property> <property name="firstName" 
+		value="jaspreet"></property> <property name="created"> <bean factory-bean="formatter" 
+		factory-method="parse"> <constructor-arg value="2019-01-06"></constructor-arg> 
+		</bean> </property> </bean> -->
+	<bean id="formatter" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd"></constructor-arg>
+	</bean>
+
+	<bean class="beans.Employee">
+		<property name="property">
+			<util:properties location="classpath:/resources/profile.properties"></util:properties>
+		</property>
+	</bean>
+	
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/resources/profile.properties</value>
+			</list>
+		</property>
+	</bean>
+ -->
+ 
+ <bean class="beans.Student" c:in="123" autowire="byType">
+ </bean>
+ 
+ <bean class="beans.Car" autowire="byType">
+ </bean>
+ 
+ <bean id="engine" class="beans.Engine">
+ 	<property name="modelYear" value="2019"></property>
+ </bean>
+ 
+ <bean class="beans.ApplicationContextProvider"></bean>
+ 
+ <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 
+ 		<property name="locations">
+ 			<list>
+ 				<value>classpath:/resources/profile.properties</value>
+ 			</list>
+ 		</property>
+ </bean>
+ 
+ <bean class="beans.Message"></bean>
+ 
+ 
+<!--  <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+ 	<property name="arguments">
+ 		<list>
+ 			<value>factoryConcepts.ICICI</value>
+ 		</list>
+ 	</property>
+ 	<property name="staticMethod" value="factoryConcepts.BankFactory.setBankName"></property>
+ </bean> -->
+ 
+<!--  <bean class="beans.Bank">
+ 	<property name="bankName" value="ICICI"></property>
+ </bean> -->
+ 
+ <bean class="staticConcepts.SessionFactory" factory-method="getSessionFactory"></bean>
+ 
+ <bean class="java.util.Calendar" factory-method="getInstance"></bean>
+ 
+ <!-- <bean id="bf" class="factoryConcepts.BankFactory">
+ </bean>
+  -->
+ <!-- <bean id="bank" class="factoryConcepts.Bank" factory-method="getBank" factory-bean="bf">
+ 	<constructor-arg value="factoryConcepts.SBI"></constructor-arg>
+ </bean>
+  -->
+<!--  <bean class="org.apache.log4j.Logger" factory-method="getLogger">
+ 	<constructor-arg value="org.jp.SpringHelloWorld.App1.class"></constructor-arg>
+ </bean> -->
+ 
+ <!-- <bean class="factoryConcepts.NewBankFactory"></bean>
+  -->
+ <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+ 	<property name="basenames">
+ 		<list>
+ 			<value>resources/profile</value>
+ 		</list>
+ 	</property>
+ </bean>
+ 
+ <bean id="emp" class="SingletonPrototypeConcept.Employee" autowire="byType">
+ 	<property name="name" value="jaspreet"></property>
+ 	<lookup-method name="getAddress"/>
+ </bean>
+ 
+ <bean id="address" class="SingletonPrototypeConcept.Address" scope="prototype">
+ 	<property name="city" value="New Delhi"></property>
+ 	<property name="street" value="Delhi"></property>
+ </bean>
+ 
+  
+  <bean id="fi" class="java.io.FileInputStream">
+  	<constructor-arg value="mybatis-config.xml"></constructor-arg>
+  </bean>
+  
+  <bean id="builder" class="org.apache.ibatis.session.SqlSessionFactoryBuilder">
+  </bean>
+  
+  <bean class="org.apache.ibatis.session.SqlSessionFactory" factory-bean="builder" factory-method="build">
+  	<constructor-arg ref="fi"></constructor-arg>
+  </bean>
+  
+  <bean id="bf" class="factoryConcepts.BankFactory" factory-method="getBank">
+  	<constructor-arg value="factoryConcepts.ICICI"></constructor-arg>
+  </bean>
+  
+  <bean class="methodReplacer.HelloWorld">
+  	<replaced-method name="sayHello" replacer="hr"></replaced-method>
+  </bean>
+  
+  <bean id="hr" class="methodReplacer.HelloReplacer">
+  </bean>
+  
+  
+</beans>
